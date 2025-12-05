@@ -1,7 +1,6 @@
 <?php
 // YFClaim Sellers Management
-require_once dirname(__DIR__, 4) . '/config/database.php';
-require_once dirname(__DIR__, 4) . '/vendor/autoload.php';
+require_once __DIR__ . '/bootstrap.php';
 
 use YFEvents\Modules\YFClaim\Models\SellerModel;
 use YFEvents\Modules\YFClaim\Models\SaleModel;
@@ -416,7 +415,7 @@ if (isset($_GET['edit'])) {
     <div class="header">
         <h1>Manage Sellers</h1>
         <div class="header-nav">
-            <a href="/modules/yfclaim/www/admin/">Dashboard</a>
+            <a href="/claims/admin/">Dashboard</a>
             <a href="/admin/">YFEvents Admin</a>
             <a href="/admin/logout.php">Logout</a>
         </div>
@@ -432,12 +431,12 @@ if (isset($_GET['edit'])) {
         <?php endif; ?>
         
         <div class="nav">
-            <a href="/modules/yfclaim/www/admin/index.php">Dashboard</a>
-            <a href="/modules/yfclaim/www/admin/sellers.php" class="active">Manage Sellers</a>
-            <a href="/modules/yfclaim/www/admin/sales.php">Manage Sales</a>
-            <a href="/modules/yfclaim/www/admin/offers.php">Manage Offers</a>
-            <a href="/modules/yfclaim/www/admin/buyers.php">Manage Buyers</a>
-            <a href="/modules/yfclaim/www/admin/reports.php">Reports</a>
+            <a href="/claims/admin/index.php">Dashboard</a>
+            <a href="/claims/admin/sellers.php" class="active">Manage Sellers</a>
+            <a href="/claims/admin/sales.php">Manage Sales</a>
+            <a href="/claims/admin/offers.php">Manage Offers</a>
+            <a href="/claims/admin/buyers.php">Manage Buyers</a>
+            <a href="/claims/admin/reports.php">Reports</a>
         </div>
         
         <div class="section">
@@ -455,7 +454,7 @@ if (isset($_GET['edit'])) {
                     <option value="suspended" <?= $status === 'suspended' ? 'selected' : '' ?>>Suspended</option>
                 </select>
                 <button type="submit" class="btn btn-primary">Filter</button>
-                <a href="/modules/yfclaim/www/admin/sellers.php" class="btn">Clear</a>
+                <a href="/claims/admin/sellers.php" class="btn">Clear</a>
             </form>
             
             <table>
@@ -604,7 +603,7 @@ if (isset($_GET['edit'])) {
         function closeModal() {
             document.getElementById('sellerModal').classList.remove('active');
             if (window.location.search.includes('edit=')) {
-                window.location.href = '/modules/yfclaim/www/admin/sellers.php';
+                window.location.href = '/claims/admin/sellers.php';
             }
         }
         

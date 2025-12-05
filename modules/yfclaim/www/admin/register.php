@@ -3,7 +3,7 @@ session_start();
 
 // Check if already logged in
 if (isset($_SESSION['claim_seller_logged_in']) && $_SESSION['claim_seller_logged_in'] === true) {
-    header('Location: /modules/yfclaim/www/dashboard/');
+    header('Location: /seller/');
     exit;
 }
 ?>
@@ -307,7 +307,7 @@ if (isset($_SESSION['claim_seller_logged_in']) && $_SESSION['claim_seller_logged
         
         <div class="links">
             <a href="/">← Back to Calendar</a>
-            <a href="/modules/yfclaim/www/">Browse Sales</a>
+            <a href="/claims/">Browse Sales</a>
         </div>
     </div>
     

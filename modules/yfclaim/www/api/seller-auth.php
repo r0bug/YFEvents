@@ -1,15 +1,11 @@
 <?php
-session_start();
-
 // Load dependencies
-require_once __DIR__ . '/../../../../../vendor/autoload.php';
-require_once __DIR__ . '/../../../../../config/database.php';
-require_once __DIR__ . '/../../src/Services/ClaimAuthService.php';
+require_once dirname(__DIR__) . '/bootstrap.php';
 
 use YFEvents\Modules\YFClaim\Services\ClaimAuthService;
 
 // Initialize auth service
-$authService = new ClaimAuthService($db);
+$authService = new ClaimAuthService($pdo);
 
 // Handle login request
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -40,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo json_encode([
                 'success' => true,
                 'seller' => $result['seller'],
-                'redirect' => '/modules/yfclaim/www/dashboard/'
+                'redirect' => '/seller/'
             ]);
         } else {
             echo json_encode($result);
@@ -71,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE' || (isset($_GET['action']) && $_GET[
         header('Content-Type: application/json');
         echo json_encode(['success' => true]);
     } else {
-        header('Location: /modules/yfclaim/www/admin/login.php');
+        header('Location: /claims/admin/login.php');
     }
     exit;
 }

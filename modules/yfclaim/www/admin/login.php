@@ -3,7 +3,7 @@ session_start();
 
 // Check if already logged in
 if (isset($_SESSION['claim_seller_logged_in']) && $_SESSION['claim_seller_logged_in'] === true) {
-    header('Location: /modules/yfclaim/www/dashboard/');
+    header('Location: /seller/');
     exit;
 }
 ?>
@@ -280,7 +280,7 @@ if (isset($_SESSION['claim_seller_logged_in']) && $_SESSION['claim_seller_logged
                 if (data.success) {
                     alerts.innerHTML = '<div class="alert alert-success">Login successful! Redirecting to dashboard...</div>';
                     setTimeout(() => {
-                        window.location.href = '/modules/yfclaim/www/dashboard/';
+                        window.location.href = '/seller/';
                     }, 1500);
                 } else {
                     alerts.innerHTML = `<div class="alert alert-error">${data.error || 'Login failed'}</div>`;

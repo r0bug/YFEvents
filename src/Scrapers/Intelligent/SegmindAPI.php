@@ -9,8 +9,8 @@ class SegmindAPI
     
     // Available models - exact endpoints from user
     const MODEL_LLAVA = 'llava-v1.6';
-    const MODEL_CLAUDE_SONNET = 'claude-3.7-sonnet';
-    const MODEL_CLAUDE_35_SONNET = 'claude-3.5-sonnet';
+    const MODEL_CLAUDE_SONNET = 'kimi-k2-instruct-0905';  // Claude unavailable, using Kimi K2
+    const MODEL_CLAUDE_35_SONNET = 'kimi-k2-instruct-0905';  // Claude unavailable, using Kimi K2
     
     public function __construct($apiKey = null)
     {

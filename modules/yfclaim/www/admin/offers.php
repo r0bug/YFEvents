@@ -1,7 +1,6 @@
 <?php
 // YFClaim Offers Management
-require_once dirname(__DIR__, 4) . '/config/database.php';
-require_once dirname(__DIR__, 4) . '/vendor/autoload.php';
+require_once __DIR__ . '/bootstrap.php';
 
 // Use proper namespaces
 use YFEvents\Modules\YFClaim\Models\OfferModel;
@@ -552,7 +551,7 @@ if (isset($_GET['view']) && $_GET['view']) {
     <div class="header">
         <h1>Manage Offers</h1>
         <div class="header-nav">
-            <a href="/modules/yfclaim/www/admin/">Dashboard</a>
+            <a href="/claims/admin/">Dashboard</a>
             <a href="/admin/">YFEvents Admin</a>
             <a href="/admin/logout.php">Logout</a>
         </div>
@@ -568,12 +567,12 @@ if (isset($_GET['view']) && $_GET['view']) {
         <?php endif; ?>
         
         <div class="nav">
-            <a href="/modules/yfclaim/www/admin/index.php">Dashboard</a>
-            <a href="/modules/yfclaim/www/admin/sellers.php">Manage Sellers</a>
-            <a href="/modules/yfclaim/www/admin/sales.php">Manage Sales</a>
-            <a href="/modules/yfclaim/www/admin/offers.php" class="active">Manage Offers</a>
-            <a href="/modules/yfclaim/www/admin/buyers.php">Manage Buyers</a>
-            <a href="/modules/yfclaim/www/admin/reports.php">Reports</a>
+            <a href="/claims/admin/index.php">Dashboard</a>
+            <a href="/claims/admin/sellers.php">Manage Sellers</a>
+            <a href="/claims/admin/sales.php">Manage Sales</a>
+            <a href="/claims/admin/offers.php" class="active">Manage Offers</a>
+            <a href="/claims/admin/buyers.php">Manage Buyers</a>
+            <a href="/claims/admin/reports.php">Reports</a>
         </div>
         
         <div class="stats">
@@ -599,7 +598,7 @@ if (isset($_GET['view']) && $_GET['view']) {
             <div class="section">
                 <div class="section-header">
                     <h2>Offer Details #<?= $viewOffer['id'] ?></h2>
-                    <a href="/modules/yfclaim/www/admin/offers.php" class="btn btn-primary">Back to List</a>
+                    <a href="/claims/admin/offers.php" class="btn btn-primary">Back to List</a>
                 </div>
                 
                 <div class="offer-details">
@@ -681,7 +680,7 @@ if (isset($_GET['view']) && $_GET['view']) {
                             <div class="detail-row">
                                 <span class="detail-label">Sale:</span>
                                 <span>
-                                    <a href="/modules/yfclaim/www/admin/sales.php?id=<?= $viewOffer['sale']['id'] ?>" style="color: #007bff;">
+                                    <a href="/claims/admin/sales.php?id=<?= $viewOffer['sale']['id'] ?>" style="color: #007bff;">
                                         <?= htmlspecialchars($viewOffer['sale']['title']) ?>
                                     </a>
                                 </span>
@@ -739,7 +738,7 @@ if (isset($_GET['view']) && $_GET['view']) {
                         <option value="expired" <?= $status === 'expired' ? 'selected' : '' ?>>Expired</option>
                     </select>
                     <button type="submit" class="btn btn-primary">Filter</button>
-                    <a href="/modules/yfclaim/www/admin/offers.php" class="btn">Clear</a>
+                    <a href="/claims/admin/offers.php" class="btn">Clear</a>
                 </form>
                 
                 <table>
@@ -770,7 +769,7 @@ if (isset($_GET['view']) && $_GET['view']) {
                                 <?php endif; ?>
                             </td>
                             <td>
-                                <a href="/modules/yfclaim/www/admin/sales.php?id=<?= $offer['sale_id'] ?>" style="color: #007bff;">
+                                <a href="/claims/admin/sales.php?id=<?= $offer['sale_id'] ?>" style="color: #007bff;">
                                     <?= htmlspecialchars($offer['sale_title']) ?>
                                 </a>
                                 <div class="offer-info">by <?= htmlspecialchars($offer['seller_name']) ?></div>

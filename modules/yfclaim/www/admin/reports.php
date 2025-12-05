@@ -1,6 +1,6 @@
 <?php
 // YFClaim Reports
-require_once dirname(__DIR__, 4) . '/config/database.php';
+require_once __DIR__ . '/bootstrap.php';
 
 // Authentication check
 session_start();
@@ -366,7 +366,7 @@ $offerStats = $pdo->query("
     <div class="header">
         <h1>Reports & Analytics</h1>
         <div class="header-nav">
-            <a href="/modules/yfclaim/www/admin/">Dashboard</a>
+            <a href="/claims/admin/">Dashboard</a>
             <a href="/admin/">YFEvents Admin</a>
             <a href="/admin/logout.php">Logout</a>
         </div>
@@ -374,12 +374,12 @@ $offerStats = $pdo->query("
     
     <div class="container">
         <div class="nav">
-            <a href="/modules/yfclaim/www/admin/index.php">Dashboard</a>
-            <a href="/modules/yfclaim/www/admin/sellers.php">Manage Sellers</a>
-            <a href="/modules/yfclaim/www/admin/sales.php">Manage Sales</a>
-            <a href="/modules/yfclaim/www/admin/offers.php">Manage Offers</a>
-            <a href="/modules/yfclaim/www/admin/buyers.php">Manage Buyers</a>
-            <a href="/modules/yfclaim/www/admin/reports.php" class="active">Reports</a>
+            <a href="/claims/admin/index.php">Dashboard</a>
+            <a href="/claims/admin/sellers.php">Manage Sellers</a>
+            <a href="/claims/admin/sales.php">Manage Sales</a>
+            <a href="/claims/admin/offers.php">Manage Offers</a>
+            <a href="/claims/admin/buyers.php">Manage Buyers</a>
+            <a href="/claims/admin/reports.php" class="active">Reports</a>
         </div>
         
         <div class="date-filter">

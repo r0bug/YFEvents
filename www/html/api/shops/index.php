@@ -1,11 +1,18 @@
 <?php
 // API endpoint for shops
-require_once '../../../../config/database.php';
+$dbConfig = require '../../../../config/database.php';
 
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 
 try {
+    $db = new PDO(
+        "mysql:host={$dbConfig['host']};dbname={$dbConfig['name']};charset={$dbConfig['charset']}",
+        $dbConfig['username'],
+        $dbConfig['password'],
+        $dbConfig['options']
+    );
+
     $query = "SELECT * FROM local_shops WHERE status = 'active'";
     $stmt = $db->prepare($query);
     $stmt->execute();

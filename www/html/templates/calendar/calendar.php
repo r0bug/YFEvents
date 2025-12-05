@@ -255,15 +255,15 @@
     </div>
 
     <!-- Scripts -->
-    <script src="/js/calendar.js"></script>
-    <script src="/js/calendar-map-fix.js"></script>
-    <script src="/js/map-controls.js"></script>
+    <script src="/js/calendar.js?v=<?= time() ?>"></script>
+    <script src="/js/calendar-map-fix.js?v=<?= time() ?>"></script>
+    <script src="/js/map-controls.js?v=<?= time() ?>"></script>
     <script>
         // Initialize calendar with configuration
         document.addEventListener('DOMContentLoaded', function() {
             const calendar = new YakimaCalendar({
                 apiEndpoint: '/api/events-simple.php',
-                shopsEndpoint: '/api/shops',
+                shopsEndpoint: '/api/shops/',
                 currentDate: new Date(),
                 defaultView: 'day',
                 userLocation: null,

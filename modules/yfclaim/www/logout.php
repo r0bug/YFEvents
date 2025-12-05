@@ -9,5 +9,5 @@ unset($_SESSION['auth_method']);
 unset($_SESSION['auth_contact']);
 
 // Redirect to home
-header('Location: /modules/yfclaim/www/');
+header('Location: /claims/');
 exit;

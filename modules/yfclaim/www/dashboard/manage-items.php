@@ -3,12 +3,11 @@ session_start();
 
 // Check if seller is logged in
 if (!isset($_SESSION['claim_seller_logged_in']) || $_SESSION['claim_seller_logged_in'] !== true) {
-    header('Location: /modules/yfclaim/www/admin/login.php');
+    header('Location: /claims/admin/login.php');
     exit;
 }
 
-require_once __DIR__ . '/../../../../config/database.php';
-require_once __DIR__ . '/../../../../vendor/autoload.php';
+require_once __DIR__ . '/bootstrap.php';
 
 use YFEvents\Modules\YFClaim\Models\SaleModel;
 use YFEvents\Modules\YFClaim\Models\ItemModel;
@@ -396,7 +395,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
             <nav class="nav-links">
                 <a href="index.php">Dashboard</a>
                 <a href="sales.php">My Sales</a>
-                <a href="/modules/yfclaim/www/api/seller-auth.php?action=logout">Logout</a>
+                <a href="/claims/api/seller-auth.php?action=logout">Logout</a>
             </nav>
         </div>
     </div>
@@ -476,7 +475,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                                         <button class="btn btn-secondary btn-small" onclick="editItem(<?= $item['id'] ?>)">Edit</button>
                                         <button class="btn btn-secondary btn-small" onclick="deleteItem(<?= $item['id'] ?>)">Delete</button>
                                         <?php if ($item['status'] === 'available'): ?>
-                                            <a href="/modules/yfclaim/www/item.php?id=<?= $item['id'] ?>" class="btn btn-primary btn-small" target="_blank">View Public</a>
+                                            <a href="/claims/item.php?id=<?= $item['id'] ?>" class="btn btn-primary btn-small" target="_blank">View Public</a>
                                         <?php endif; ?>
                                     </div>
                                 </div>
@@ -549,7 +548,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                     
                     <div id="quickActions">
                         <h3>Quick Actions</h3>
-                        <a href="/modules/yfclaim/www/sale.php?id=<?= $sale['id'] ?>" class="btn btn-primary" target="_blank" style="width: 100%; margin-bottom: 0.5rem;">View Public Sale Page</a>
+                        <a href="/claims/sale.php?id=<?= $sale['id'] ?>" class="btn btn-primary" target="_blank" style="width: 100%; margin-bottom: 0.5rem;">View Public Sale Page</a>
                         <a href="view-offers.php?sale_id=<?= $sale['id'] ?>" class="btn btn-secondary" style="width: 100%; margin-bottom: 0.5rem;">View Offers</a>
                         <a href="sales.php" class="btn btn-secondary" style="width: 100%;">Back to Sales</a>
                     </div>

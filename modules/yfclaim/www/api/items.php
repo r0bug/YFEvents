@@ -13,8 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit(0);
 }
 
-require_once dirname(__DIR__, 4) . '/config/database.php';
-require_once dirname(__DIR__, 4) . '/vendor/autoload.php';
+require_once dirname(__DIR__) . '/bootstrap.php';
 
 use YFEvents\Modules\YFClaim\Models\ItemModel;
 use YFEvents\Modules\YFClaim\Models\SaleModel;

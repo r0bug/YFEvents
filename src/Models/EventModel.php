@@ -306,42 +306,49 @@ class EventModel extends BaseModel
     private function findSimilarDuplicates($title, $start_datetime, $latitude = null, $longitude = null)
     {
         // Use similarity function for title matching
+        // Note: Each parameter can only appear once in PDO queries with named params
         $sql = "SELECT id, title, start_datetime, latitude, longitude,
-                       (CASE 
-                        WHEN title = :exact_title THEN 100
-                        WHEN SOUNDEX(title) = SOUNDEX(:exact_title) THEN 80
-                        WHEN title LIKE :fuzzy_title THEN 60
+                       (CASE
+                        WHEN title = :exact_title1 THEN 100
+                        WHEN SOUNDEX(title) = SOUNDEX(:exact_title2) THEN 80
+                        WHEN title LIKE :fuzzy_title1 THEN 60
                         ELSE 0
                        END) as similarity_score
-                FROM events 
-                WHERE (title = :exact_title 
-                       OR SOUNDEX(title) = SOUNDEX(:exact_title)
-                       OR title LIKE :fuzzy_title)
+                FROM events
+                WHERE (title = :exact_title3
+                       OR SOUNDEX(title) = SOUNDEX(:exact_title4)
+                       OR title LIKE :fuzzy_title2)
                 AND ABS(TIMESTAMPDIFF(MINUTE, start_datetime, :start_datetime)) <= 30";
-        
+
+        $fuzzyTitle = '%' . $title . '%';
         $params = [
-            'exact_title' => $title,
-            'fuzzy_title' => '%' . $title . '%',
+            'exact_title1' => $title,
+            'exact_title2' => $title,
+            'exact_title3' => $title,
+            'exact_title4' => $title,
+            'fuzzy_title1' => $fuzzyTitle,
+            'fuzzy_title2' => $fuzzyTitle,
             'start_datetime' => $start_datetime
         ];
-        
+
         // Add location proximity check if coordinates provided
         if ($latitude && $longitude) {
-            $sql .= " AND ((latitude IS NULL OR longitude IS NULL) OR 
-                     (6371 * acos(cos(radians(:lat)) * cos(radians(latitude)) * 
-                      cos(radians(longitude) - radians(:lng)) + 
-                      sin(radians(:lat)) * sin(radians(latitude)))) <= 0.1)";
-            $params['lat'] = $latitude;
+            $sql .= " AND ((latitude IS NULL OR longitude IS NULL) OR
+                     (6371 * acos(cos(radians(:lat1)) * cos(radians(latitude)) *
+                      cos(radians(longitude) - radians(:lng)) +
+                      sin(radians(:lat2)) * sin(radians(latitude)))) <= 0.1)";
+            $params['lat1'] = $latitude;
+            $params['lat2'] = $latitude;
             $params['lng'] = $longitude;
         }
-        
+
         $sql .= " ORDER BY similarity_score DESC";
-        
+
         $stmt = $this->db->prepare($sql);
         $stmt->execute($params);
-        
+
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
+
         // Only return high-confidence matches (similarity >= 80)
         return array_filter($results, function($row) {
             return $row['similarity_score'] >= 80;

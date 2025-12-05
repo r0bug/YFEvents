@@ -16,3 +16,17 @@ yarn-error.log
 Thumbs.db
 *.log
 !.gitkeep
+/archive/
+www/html/.env
+www/html/config/
+
+# Additional security
+config/email.php
+config/sms.php
+cache/
+*.log
+logs/*.log
+
+# Test files
+test_*.php
+*_test.php

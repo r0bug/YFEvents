@@ -1343,29 +1343,6 @@ class YakimaCalendar {
     }
     
     /**
-     * Render current view
-     */
-    renderCurrentView() {
-        switch (this.currentView) {
-            case 'day':
-                this.renderDayView();
-                break;
-            case 'week':
-                this.renderWeekView();
-                break;
-            case 'month':
-                this.renderMonthView();
-                break;
-            case 'list':
-                this.renderListView();
-                break;
-            case 'map':
-                this.renderMapView();
-                break;
-        }
-    }
-    
-    /**
      * Render daily view
      */
     renderDayView() {
@@ -1546,29 +1523,6 @@ class YakimaCalendar {
             this.dailyMap.setCenter(this.options.mapOptions.center);
             this.dailyMap.setZoom(this.options.mapOptions.zoom);
         }
-    }
-    
-    /**
-     * Placeholder render methods for other views
-     */
-    renderWeekView() {
-        // Existing week view implementation
-        console.log('Rendering week view');
-    }
-    
-    renderMonthView() {
-        // Existing month view implementation
-        console.log('Rendering month view');
-    }
-    
-    renderListView() {
-        // Existing list view implementation
-        console.log('Rendering list view');
-    }
-    
-    renderMapView() {
-        // Existing map view implementation
-        console.log('Rendering map view');
     }
 }
 

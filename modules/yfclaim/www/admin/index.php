@@ -55,7 +55,7 @@ if (!$isLoggedIn) {
     exit;
 }
 
-require_once dirname(__DIR__, 4) . '/config/database.php';
+require_once __DIR__ . '/bootstrap.php';
 
 // Get statistics
 $stats = [];
@@ -156,16 +156,16 @@ try {
         </div>
         
         <div class="nav-buttons">
-            <a href="/modules/yfclaim/www/admin/sellers.php" class="nav-btn">
+            <a href="/claims/admin/sellers.php" class="nav-btn">
                 <i class="fas fa-users"></i> Manage Sellers
             </a>
-            <a href="/modules/yfclaim/www/admin/sales.php" class="nav-btn">
+            <a href="/claims/admin/sales.php" class="nav-btn">
                 <i class="fas fa-store"></i> Manage Sales
             </a>
-            <a href="/modules/yfclaim/www/admin/offers.php" class="nav-btn">
+            <a href="/claims/admin/offers.php" class="nav-btn">
                 <i class="fas fa-handshake"></i> View Offers
             </a>
-            <a href="/modules/yfclaim/www/admin/buyers.php" class="nav-btn">
+            <a href="/claims/admin/buyers.php" class="nav-btn">
                 <i class="fas fa-shopping-cart"></i> Manage Buyers
             </a>
         </div>
@@ -258,9 +258,9 @@ try {
                     <div class="card-title">Quick Actions</div>
                 </div>
                 <ul class="item-list">
-                    <li><a href="/modules/yfclaim/www/admin/sellers.php?action=add">Add New Seller</a></li>
-                    <li><a href="/modules/yfclaim/www/admin/sales.php?action=add">Create New Sale</a></li>
-                    <li><a href="/modules/yfclaim/www/admin/offers.php?status=pending">Review Pending Offers</a></li>
+                    <li><a href="/claims/admin/sellers.php?action=add">Add New Seller</a></li>
+                    <li><a href="/claims/admin/sales.php?action=add">Create New Sale</a></li>
+                    <li><a href="/claims/admin/offers.php?status=pending">Review Pending Offers</a></li>
                     <li><a href="/modules/yfclaim/database/schema.sql">Install Database Schema</a></li>
                 </ul>
             </div>

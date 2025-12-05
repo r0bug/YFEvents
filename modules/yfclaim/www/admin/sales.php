@@ -1,7 +1,6 @@
 <?php
 // YFClaim Sales Management
-require_once dirname(__DIR__, 4) . '/config/database.php';
-require_once dirname(__DIR__, 4) . '/vendor/autoload.php';
+require_once __DIR__ . '/bootstrap.php';
 
 // Use proper namespace imports
 use YFEvents\Modules\YFClaim\Models\SaleModel;
@@ -87,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     ];
                     $saleId = $saleModel->createSale($data);
                     $message = "Sale created successfully! Sale ID: $saleId";
-                    header("Location: /modules/yfclaim/www/admin/sales.php?id=$saleId");
+                    header("Location: /claims/admin/sales.php?id=$saleId");
                     exit;
                     break;
                     
@@ -163,7 +162,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     // Delete the sale
                     $saleModel->deleteSale($_POST['sale_id']);
                     $message = "Sale deleted successfully!";
-                    header("Location: /modules/yfclaim/www/admin/sales.php");
+                    header("Location: /claims/admin/sales.php");
                     exit;
                     break;
             }
@@ -554,7 +553,7 @@ $activeSellers = $sellerModel->getActive();
     <div class="header">
         <h1><?= $sale ? 'Sale Details' : 'Manage Sales' ?></h1>
         <div class="header-nav">
-            <a href="/modules/yfclaim/www/admin/">Dashboard</a>
+            <a href="/claims/admin/">Dashboard</a>
             <a href="/admin/">YFEvents Admin</a>
             <a href="/admin/logout.php">Logout</a>
         </div>
@@ -570,12 +569,12 @@ $activeSellers = $sellerModel->getActive();
         <?php endif; ?>
         
         <div class="nav">
-            <a href="/modules/yfclaim/www/admin/index.php">Dashboard</a>
-            <a href="/modules/yfclaim/www/admin/sellers.php">Manage Sellers</a>
-            <a href="/modules/yfclaim/www/admin/sales.php" class="active">Manage Sales</a>
-            <a href="/modules/yfclaim/www/admin/offers.php">Manage Offers</a>
-            <a href="/modules/yfclaim/www/admin/buyers.php">Manage Buyers</a>
-            <a href="/modules/yfclaim/www/admin/reports.php">Reports</a>
+            <a href="/claims/admin/index.php">Dashboard</a>
+            <a href="/claims/admin/sellers.php">Manage Sellers</a>
+            <a href="/claims/admin/sales.php" class="active">Manage Sales</a>
+            <a href="/claims/admin/offers.php">Manage Offers</a>
+            <a href="/claims/admin/buyers.php">Manage Buyers</a>
+            <a href="/claims/admin/reports.php">Reports</a>
         </div>
         
         <?php if ($sale): ?>
@@ -739,7 +738,7 @@ $activeSellers = $sellerModel->getActive();
             </div>
             
             <div style="text-align: center;">
-                <a href="/modules/yfclaim/www/admin/sales.php" class="btn">← Back to Sales List</a>
+                <a href="/claims/admin/sales.php" class="btn">← Back to Sales List</a>
             </div>
             
         <?php else: ?>
@@ -758,7 +757,7 @@ $activeSellers = $sellerModel->getActive();
                         <option value="closed" <?= $status === 'closed' ? 'selected' : '' ?>>Closed</option>
                     </select>
                     <button type="submit" class="btn btn-primary">Filter</button>
-                    <a href="/modules/yfclaim/www/admin/sales.php" class="btn">Clear</a>
+                    <a href="/claims/admin/sales.php" class="btn">Clear</a>
                 </form>
                 
                 <table>

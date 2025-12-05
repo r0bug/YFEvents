@@ -1,7 +1,6 @@
 <?php
 // YFClaim Buyers Management
-require_once dirname(__DIR__, 4) . '/config/database.php';
-require_once dirname(__DIR__, 4) . '/vendor/autoload.php';
+require_once __DIR__ . '/bootstrap.php';
 
 use YFEvents\Modules\YFClaim\Models\BuyerModel;
 
@@ -462,7 +461,7 @@ $stats['winning_offers'] = array_sum(array_column($buyers, 'winning_offers'));
     <div class="header">
         <h1>Manage Buyers</h1>
         <div class="header-nav">
-            <a href="/modules/yfclaim/www/admin/">Dashboard</a>
+            <a href="/claims/admin/">Dashboard</a>
             <a href="/admin/">YFEvents Admin</a>
             <a href="/admin/logout.php">Logout</a>
         </div>
@@ -478,12 +477,12 @@ $stats['winning_offers'] = array_sum(array_column($buyers, 'winning_offers'));
         <?php endif; ?>
         
         <div class="nav">
-            <a href="/modules/yfclaim/www/admin/index.php">Dashboard</a>
-            <a href="/modules/yfclaim/www/admin/sellers.php">Manage Sellers</a>
-            <a href="/modules/yfclaim/www/admin/sales.php">Manage Sales</a>
-            <a href="/modules/yfclaim/www/admin/offers.php">Manage Offers</a>
-            <a href="/modules/yfclaim/www/admin/buyers.php" class="active">Manage Buyers</a>
-            <a href="/modules/yfclaim/www/admin/reports.php">Reports</a>
+            <a href="/claims/admin/index.php">Dashboard</a>
+            <a href="/claims/admin/sellers.php">Manage Sellers</a>
+            <a href="/claims/admin/sales.php">Manage Sales</a>
+            <a href="/claims/admin/offers.php">Manage Offers</a>
+            <a href="/claims/admin/buyers.php" class="active">Manage Buyers</a>
+            <a href="/claims/admin/reports.php">Reports</a>
         </div>
         
         <div class="stats">
@@ -531,7 +530,7 @@ $stats['winning_offers'] = array_sum(array_column($buyers, 'winning_offers'));
                     <?php endforeach; ?>
                 </select>
                 <button type="submit" class="btn btn-primary">Filter</button>
-                <a href="/modules/yfclaim/www/admin/buyers.php" class="btn">Clear</a>
+                <a href="/claims/admin/buyers.php" class="btn">Clear</a>
             </form>
             
             <table>
@@ -553,7 +552,7 @@ $stats['winning_offers'] = array_sum(array_column($buyers, 'winning_offers'));
                     <tr>
                         <td><?= $buyer['id'] ?></td>
                         <td>
-                            <a href="/modules/yfclaim/www/admin/offers.php?buyer_id=<?= $buyer['id'] ?>" style="color: #007bff; text-decoration: none;">
+                            <a href="/claims/admin/offers.php?buyer_id=<?= $buyer['id'] ?>" style="color: #007bff; text-decoration: none;">
                                 <?= htmlspecialchars($buyer['name']) ?>
                             </a>
                             <?php if ($buyer['active_offers'] > 0): ?>
@@ -698,7 +697,7 @@ $stats['winning_offers'] = array_sum(array_column($buyers, 'winning_offers'));
         function closeModal() {
             document.getElementById('buyerModal').classList.remove('active');
             if (window.location.search.includes('edit=')) {
-                window.location.href = '/modules/yfclaim/www/admin/buyers.php';
+                window.location.href = '/claims/admin/buyers.php';
             }
         }
         

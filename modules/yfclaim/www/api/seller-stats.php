@@ -20,8 +20,7 @@ if (!isset($_SESSION['claim_seller_logged_in']) || $_SESSION['claim_seller_logge
     exit;
 }
 
-require_once __DIR__ . '/../../../../config/database.php';
-require_once __DIR__ . '/../../../../vendor/autoload.php';
+require_once dirname(__DIR__) . '/bootstrap.php';
 
 use YFEvents\Modules\YFClaim\Models\SellerModel;
 

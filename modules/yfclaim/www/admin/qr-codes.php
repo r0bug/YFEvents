@@ -1,7 +1,6 @@
 <?php
 // YFClaim QR Code Management
-require_once dirname(__DIR__, 4) . '/config/database.php';
-require_once dirname(__DIR__, 4) . '/vendor/autoload.php';
+require_once __DIR__ . '/bootstrap.php';
 
 use YFEvents\Modules\YFClaim\Models\SaleModel;
 use YFEvents\Modules\YFClaim\Models\ItemModel;
@@ -93,7 +92,7 @@ if (!$saleId) {
             <div class="error-message">
                 <p>No sale ID was provided. Please select a sale to view QR codes.</p>
             </div>
-            <a href="/modules/yfclaim/www/admin/sales.php" class="login-button">Go to Sales Management</a>
+            <a href="/claims/admin/sales.php" class="login-button">Go to Sales Management</a>
         </div>
     </body>
     </html>
@@ -127,7 +126,7 @@ if (!$sale) {
             <div class="error-message">
                 <p>The sale with ID <?= htmlspecialchars($saleId) ?> could not be found.</p>
             </div>
-            <a href="/modules/yfclaim/www/admin/sales.php" class="login-button">Go to Sales Management</a>
+            <a href="/claims/admin/sales.php" class="login-button">Go to Sales Management</a>
         </div>
     </body>
     </html>
@@ -270,7 +269,7 @@ $items = $itemModel->getBySale($saleId);
     <div class="header no-print">
         <h1>QR Codes - <?= htmlspecialchars($sale['title']) ?></h1>
         <div>
-            <a href="/modules/yfclaim/www/admin/sales.php" style="color: white; text-decoration: none;">← Back to Sales</a>
+            <a href="/claims/admin/sales.php" style="color: white; text-decoration: none;">← Back to Sales</a>
         </div>
     </div>
     
@@ -319,7 +318,7 @@ $items = $itemModel->getBySale($saleId);
             
             <div class="no-print">
                 <button onclick="window.print()" class="btn print-button">Print All QR Codes</button>
-                <a href="/modules/yfclaim/www/admin/sales.php?action=edit&id=<?= $sale['id'] ?>" class="btn">Edit Sale</a>
+                <a href="/claims/admin/sales.php?action=edit&id=<?= $sale['id'] ?>" class="btn">Edit Sale</a>
             </div>
         </div>
         

@@ -4,8 +4,7 @@
  * Modern interface for buyers to browse sales and make offers
  */
 
-require_once dirname(__DIR__, 3) . '/config/database.php';
-require_once dirname(__DIR__, 3) . '/vendor/autoload.php';
+require_once __DIR__ . '/bootstrap.php';
 
 use YFEvents\Modules\YFClaim\Models\SaleModel;
 use YFEvents\Modules\YFClaim\Models\ItemModel;
@@ -534,7 +533,7 @@ $upcomingSales = $saleModel->getUpcoming();
             formData.append('sale_id', currentSaleId);
 
             try {
-                const response = await fetch('/modules/yfclaim/www/api/buyer-auth.php', {
+                const response = await fetch('/claims/api/buyer-auth.php', {
                     method: 'POST',
                     body: formData
                 });
@@ -579,7 +578,7 @@ $upcomingSales = $saleModel->getUpcoming();
             formData.append('buyer_id', buyerId);
 
             try {
-                const response = await fetch('/modules/yfclaim/www/api/buyer-auth.php', {
+                const response = await fetch('/claims/api/buyer-auth.php', {
                     method: 'POST',
                     body: formData
                 });
@@ -604,7 +603,7 @@ $upcomingSales = $saleModel->getUpcoming();
             formData.append('buyer_id', buyerId);
 
             try {
-                const response = await fetch('/modules/yfclaim/www/api/buyer-auth.php', {
+                const response = await fetch('/claims/api/buyer-auth.php', {
                     method: 'POST',
                     body: formData
                 });
@@ -618,7 +617,7 @@ $upcomingSales = $saleModel->getUpcoming();
 
         async function logout() {
             try {
-                const response = await fetch('/modules/yfclaim/www/api/buyer-auth.php', {
+                const response = await fetch('/claims/api/buyer-auth.php', {
                     method: 'POST',
                     body: new URLSearchParams({ action: 'logout' })
                 });
@@ -650,7 +649,7 @@ $upcomingSales = $saleModel->getUpcoming();
 
         async function loadItems(saleId) {
             try {
-                const response = await fetch(`/modules/yfclaim/www/api/items.php?action=get_sale_items&sale_id=${saleId}`);
+                const response = await fetch(`/claims/api/items.php?action=get_sale_items&sale_id=${saleId}`);
                 const result = await response.json();
 
                 if (result.success) {
@@ -740,7 +739,7 @@ $upcomingSales = $saleModel->getUpcoming();
             formData.append('item_id', itemId);
 
             try {
-                const response = await fetch('/modules/yfclaim/www/api/offers.php', {
+                const response = await fetch('/claims/api/offers.php', {
                     method: 'POST',
                     body: formData
                 });

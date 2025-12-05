@@ -3,12 +3,11 @@ session_start();
 
 // Check if seller is logged in
 if (!isset($_SESSION['claim_seller_logged_in']) || $_SESSION['claim_seller_logged_in'] !== true) {
-    header('Location: /modules/yfclaim/www/admin/login.php');
+    header('Location: /claims/admin/login.php');
     exit;
 }
 
-require_once __DIR__ . '/../../../../config/database.php';
-require_once __DIR__ . '/../../../../vendor/autoload.php';
+require_once __DIR__ . '/bootstrap.php';
 
 use YFEvents\Modules\YFClaim\Models\SaleModel;
 use YFEvents\Modules\YFClaim\Models\OfferModel;
@@ -428,7 +427,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <nav class="nav-links">
                 <a href="index.php">Dashboard</a>
                 <a href="sales.php">My Sales</a>
-                <a href="/modules/yfclaim/www/api/seller-auth.php?action=logout">Logout</a>
+                <a href="/claims/api/seller-auth.php?action=logout">Logout</a>
             </nav>
         </div>
     </div>
@@ -525,7 +524,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="empty-state">
                             <h3>No Offers Yet</h3>
                             <p>Buyers haven't made any offers yet. Make sure your sale is active and items are visible!</p>
-                            <a href="/modules/yfclaim/www/sale.php?id=<?= $sale['id'] ?>" class="btn btn-primary" target="_blank">View Public Sale Page</a>
+                            <a href="/claims/sale.php?id=<?= $sale['id'] ?>" class="btn btn-primary" target="_blank">View Public Sale Page</a>
                         </div>
                     <?php else: ?>
                         <?php foreach ($offers as $offer): ?>

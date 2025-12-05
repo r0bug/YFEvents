@@ -4,16 +4,13 @@
  * Modern interface for estate sale companies to manage their sales
  */
 
-session_start();
+require_once __DIR__ . '/bootstrap.php';
 
 // Check authentication
 if (!isset($_SESSION['claim_seller_logged_in']) || $_SESSION['claim_seller_logged_in'] !== true) {
-    header('Location: /modules/yfclaim/www/seller-login.php');
+    header('Location: /claims/seller-login.php');
     exit;
 }
-
-require_once dirname(__DIR__, 3) . '/config/database.php';
-require_once dirname(__DIR__, 3) . '/vendor/autoload.php';
 
 use YFEvents\Modules\YFClaim\Models\SellerModel;
 use YFEvents\Modules\YFClaim\Models\SaleModel;
@@ -31,7 +28,7 @@ $seller = $sellerModel->find($sellerId);
 
 if (!$seller) {
     session_destroy();
-    header('Location: /modules/yfclaim/www/seller-login.php');
+    header('Location: /claims/seller-login.php');
     exit;
 }
 
@@ -460,7 +457,7 @@ if (isset($_GET['action'])) {
             </div>
             <div class="seller-info">
                 <span>Welcome, <?= htmlspecialchars($seller['company_name']) ?></span>
-                <a href="/modules/yfclaim/www/api/seller-auth.php?action=logout" class="btn btn-sm">Logout</a>
+                <a href="/claims/api/seller-auth.php?action=logout" class="btn btn-sm">Logout</a>
             </div>
         </div>
     </header>
@@ -471,7 +468,7 @@ if (isset($_GET['action'])) {
             <a href="#sales" class="nav-item" onclick="showSection('sales')">🏪 My Sales</a>
             <a href="#offers" class="nav-item" onclick="showSection('offers')">💰 Recent Offers</a>
             <a href="#analytics" class="nav-item" onclick="showSection('analytics')">📈 Analytics</a>
-            <a href="/modules/yfclaim/www/admin/" class="nav-item">⚙️ Full Admin</a>
+            <a href="/claims/admin/" class="nav-item">⚙️ Full Admin</a>
         </div>
     </nav>
 
@@ -479,9 +476,9 @@ if (isset($_GET['action'])) {
         <!-- Dashboard Section -->
         <div id="dashboard-section" class="section">
             <div class="quick-actions">
-                <a href="/modules/yfclaim/www/admin/sales.php?action=create" class="btn btn-success">➕ Create New Sale</a>
-                <a href="/modules/yfclaim/www/admin/sales.php" class="btn">📋 Manage Sales</a>
-                <a href="/modules/yfclaim/www/admin/reports.php" class="btn">📊 View Reports</a>
+                <a href="/claims/admin/sales.php?action=create" class="btn btn-success">➕ Create New Sale</a>
+                <a href="/claims/admin/sales.php" class="btn">📋 Manage Sales</a>
+                <a href="/claims/admin/reports.php" class="btn">📊 View Reports</a>
             </div>
 
             <div class="dashboard-grid">
@@ -524,8 +521,8 @@ if (isset($_GET['action'])) {
                                         <div class="loading"></div>
                                     </div>
                                     <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
-                                        <a href="/modules/yfclaim/www/admin/sales.php?id=<?= $sale['id'] ?>" class="btn btn-sm">Manage</a>
-                                        <a href="/modules/yfclaim/www/sale.php?id=<?= $sale['id'] ?>" class="btn btn-sm btn-success">View Public</a>
+                                        <a href="/claims/admin/sales.php?id=<?= $sale['id'] ?>" class="btn btn-sm">Manage</a>
+                                        <a href="/claims/sale.php?id=<?= $sale['id'] ?>" class="btn btn-sm btn-success">View Public</a>
                                     </div>
                                 </div>
                             </div>
@@ -554,7 +551,7 @@ if (isset($_GET['action'])) {
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">🏪 All My Sales</h3>
-                    <a href="/modules/yfclaim/www/admin/sales.php?action=create" class="btn">Create New Sale</a>
+                    <a href="/claims/admin/sales.php?action=create" class="btn">Create New Sale</a>
                 </div>
                 
                 <?php if (!empty($sales)): ?>
@@ -600,7 +597,7 @@ if (isset($_GET['action'])) {
                                         <span class="stat-value" style="font-size: 1rem;"><?= $offerCount->fetchColumn() ?></span>
                                     </td>
                                     <td>
-                                        <a href="/modules/yfclaim/www/admin/sales.php?id=<?= $sale['id'] ?>" class="btn btn-sm">Manage</a>
+                                        <a href="/claims/admin/sales.php?id=<?= $sale['id'] ?>" class="btn btn-sm">Manage</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -611,7 +608,7 @@ if (isset($_GET['action'])) {
                         <div class="empty-state-icon">🏪</div>
                         <h3>No Sales Yet</h3>
                         <p>Create your first estate sale to get started.</p>
-                        <a href="/modules/yfclaim/www/admin/sales.php?action=create" class="btn">Create New Sale</a>
+                        <a href="/claims/admin/sales.php?action=create" class="btn">Create New Sale</a>
                     </div>
                 <?php endif; ?>
             </div>

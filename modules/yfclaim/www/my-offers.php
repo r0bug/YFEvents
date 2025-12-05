@@ -1,7 +1,6 @@
 <?php
 // YFClaim - My Offers Page
-require_once '../../../config/database.php';
-require_once '../../../vendor/autoload.php';
+require_once __DIR__ . '/bootstrap.php';
 
 use YFEvents\Modules\YFClaim\Models\BuyerModel;
 use YFEvents\Modules\YFClaim\Models\OfferModel;
@@ -23,7 +22,7 @@ if (isset($_SESSION['buyer_token'])) {
 }
 
 if (!$currentBuyer) {
-    header('Location: /modules/yfclaim/www/');
+    header('Location: /claims/');
     exit;
 }
 
@@ -309,11 +308,11 @@ foreach ($offers as $offer) {
     <header class="header">
         <div class="header-content">
             <div class="nav-links">
-                <a href="/modules/yfclaim/www/">← Back to Sales</a>
+                <a href="/claims/">← Back to Sales</a>
             </div>
             <div class="nav-links">
                 <span>Welcome, <?= htmlspecialchars($currentBuyer['name']) ?></span>
-                <a href="/modules/yfclaim/www/logout.php">Logout</a>
+                <a href="/claims/logout.php">Logout</a>
             </div>
         </div>
     </header>
@@ -384,7 +383,7 @@ foreach ($offers as $offer) {
                                         </div>
                                     </td>
                                     <td>
-                                        <a href="/modules/yfclaim/www/claim-details.php?offer=<?= $offer['id'] ?>" class="btn btn-primary">
+                                        <a href="/claims/claim-details.php?offer=<?= $offer['id'] ?>" class="btn btn-primary">
                                             View Details
                                         </a>
                                     </td>
@@ -433,7 +432,7 @@ foreach ($offers as $offer) {
                                         <span class="status-badge status-active">Active</span>
                                     </td>
                                     <td>
-                                        <a href="/modules/yfclaim/www/item.php?id=<?= $offer['item_id'] ?>" class="btn btn-primary">
+                                        <a href="/claims/item.php?id=<?= $offer['item_id'] ?>" class="btn btn-primary">
                                             Update Offer
                                         </a>
                                     </td>
@@ -489,7 +488,7 @@ foreach ($offers as $offer) {
         <?php if (empty($offers)): ?>
             <div class="empty-state">
                 <h2>No Offers Yet</h2>
-                <p>You haven't made any offers. <a href="/modules/yfclaim/www/">Browse current sales</a> to get started!</p>
+                <p>You haven't made any offers. <a href="/claims/">Browse current sales</a> to get started!</p>
             </div>
         <?php endif; ?>
     </main>

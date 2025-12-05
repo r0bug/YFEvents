@@ -1,7 +1,6 @@
 <?php
 // YFClaim - Item Detail & Offer Submission
-require_once '../../../config/database.php';
-require_once '../../../vendor/autoload.php';
+require_once __DIR__ . '/bootstrap.php';
 
 use YFEvents\Modules\YFClaim\Models\ItemModel;
 use YFEvents\Modules\YFClaim\Models\SaleModel;
@@ -42,7 +41,7 @@ if ($itemId) {
 }
 
 if (!$sale) {
-    header('Location: /modules/yfclaim/www/');
+    header('Location: /claims/');
     exit;
 }
 
@@ -93,9 +92,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 unset($_SESSION['pending_buyer_id']);
                 
                 if ($itemId) {
-                    header("Location: /modules/yfclaim/www/item.php?id={$itemId}");
+                    header("Location: /claims/item.php?id={$itemId}");
                 } else {
-                    header("Location: /modules/yfclaim/www/sale.php?id={$saleId}");
+                    header("Location: /claims/sale.php?id={$saleId}");
                 }
                 exit;
             } else {
@@ -174,7 +173,7 @@ if ($item) {
     
     <?php if ($item): 
         $currentUrl = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-        $itemImage = !empty($item['images']) ? 'https://' . $_SERVER['HTTP_HOST'] . '/uploads/yfclaim/items/' . $item['images'][0]['filename'] : 'https://' . $_SERVER['HTTP_HOST'] . '/modules/yfclaim/www/assets/default-item.jpg';
+        $itemImage = !empty($item['images']) ? 'https://' . $_SERVER['HTTP_HOST'] . '/uploads/yfclaim/items/' . $item['images'][0]['filename'] : 'https://' . $_SERVER['HTTP_HOST'] . '/claims/assets/default-item.jpg';
         $itemDescription = $item['description'] ? strip_tags($item['description']) : 'Estate sale item available at ' . $sale['title'];
         $saleLocation = $sale['city'] . ', ' . $sale['state'];
     ?>
@@ -680,13 +679,13 @@ if ($item) {
 <body>
     <header class="header">
         <div class="header-content">
-            <a href="/modules/yfclaim/www/sale.php?id=<?= $sale['id'] ?>" class="back-link">
+            <a href="/claims/sale.php?id=<?= $sale['id'] ?>" class="back-link">
                 ← Back to <?= htmlspecialchars($sale['title']) ?>
             </a>
             <?php if ($currentBuyer): ?>
                 <div>
                     Welcome, <?= htmlspecialchars($currentBuyer['name']) ?>
-                    <a href="/modules/yfclaim/www/logout.php" style="color: white; margin-left: 1rem;">Logout</a>
+                    <a href="/claims/logout.php" style="color: white; margin-left: 1rem;">Logout</a>
                 </div>
             <?php endif; ?>
         </div>

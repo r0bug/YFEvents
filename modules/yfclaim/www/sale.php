@@ -1,7 +1,6 @@
 <?php
 // YFClaim - Sale Detail Page
-require_once '../../../config/database.php';
-require_once '../../../vendor/autoload.php';
+require_once __DIR__ . '/bootstrap.php';
 
 use YFEvents\Modules\YFClaim\Models\SaleModel;
 use YFEvents\Modules\YFClaim\Models\ItemModel;
@@ -23,7 +22,7 @@ $isPreview = isset($_GET['preview']);
 // Get sale details
 $sale = $saleModel->getWithSeller($saleId);
 if (!$sale) {
-    header('Location: /modules/yfclaim/www/');
+    header('Location: /claims/');
     exit;
 }
 
@@ -56,7 +55,7 @@ if ($now >= $claimStart && $now <= $claimEnd) {
 }
 
 if (!$canView) {
-    header('Location: /modules/yfclaim/www/');
+    header('Location: /claims/');
     exit;
 }
 
@@ -103,7 +102,7 @@ if (isset($_SESSION['buyer_token'])) {
     
     <?php 
     $currentUrl = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-    $saleImage = 'https://' . $_SERVER['HTTP_HOST'] . '/modules/yfclaim/www/assets/estate-sale-default.jpg';
+    $saleImage = 'https://' . $_SERVER['HTTP_HOST'] . '/claims/assets/estate-sale-default.jpg';
     $saleDescription = $sale['description'] ? strip_tags($sale['description']) : 'Estate sale featuring ' . count($items) . ' items including furniture, antiques, and collectibles.';
     $saleLocation = $sale['address'] . ', ' . $sale['city'] . ', ' . $sale['state'];
     $claimDates = date('M j, Y', strtotime($sale['claim_start'])) . ' - ' . date('M j, Y', strtotime($sale['claim_end']));
@@ -519,16 +518,16 @@ if (isset($_SESSION['buyer_token'])) {
 <body>
     <header class="header">
         <div class="header-content">
-            <a href="/modules/yfclaim/www/" class="back-link">
+            <a href="/claims/" class="back-link">
                 ← Back to Sales
             </a>
             <div class="buyer-info">
                 <?php if ($currentBuyer): ?>
                     <span>Welcome, <?= htmlspecialchars($currentBuyer['name']) ?></span>
-                    <a href="/modules/yfclaim/www/my-offers.php" style="color: white;">My Offers</a>
-                    <a href="/modules/yfclaim/www/logout.php" style="color: white;">Logout</a>
+                    <a href="/claims/my-offers.php" style="color: white;">My Offers</a>
+                    <a href="/claims/logout.php" style="color: white;">Logout</a>
                 <?php elseif ($canClaim): ?>
-                    <a href="/modules/yfclaim/www/item.php?sale=<?= $saleId ?>" class="btn btn-primary" style="width: auto; margin: 0; padding: 0.5rem 1rem;">
+                    <a href="/claims/item.php?sale=<?= $saleId ?>" class="btn btn-primary" style="width: auto; margin: 0; padding: 0.5rem 1rem;">
                         Sign In to Make Offers
                     </a>
                 <?php endif; ?>
@@ -744,7 +743,7 @@ if (isset($_SESSION['buyer_token'])) {
         }
         
         function viewItem(itemId) {
-            window.location.href = `/modules/yfclaim/www/item.php?id=${itemId}`;
+            window.location.href = `/claims/item.php?id=${itemId}`;
         }
     </script>
 </body>
